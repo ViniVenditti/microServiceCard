@@ -61,4 +61,15 @@ public class CardService {
             throw new CartaoNotFoundException();
     }
 
+    public String blockCardById(Long cardId) {
+        Optional<CardEntity> cartao = cardRepository.findById(cardId);
+        if (cartao.isPresent()) {
+            CardEntity cardEntity = cartao.get();
+            cardEntity.setActive(false);
+            CardEntity cartaoAtualizado = cardRepository.save(cardEntity);
+            return "Ok";
+        } else
+            throw new CartaoNotFoundException();
+    }
+
 }

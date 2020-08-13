@@ -3,6 +3,7 @@ package br.com.vinicius.creditcard.controller;
 import br.com.vinicius.creditcard.mapper.CardMapper;
 import br.com.vinicius.creditcard.model.*;
 import br.com.vinicius.creditcard.service.CardService;
+import org.hibernate.loader.plan.build.internal.LoadGraphLoadPlanBuildingStrategy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,11 @@ public class CardController {
         CardModel cartao = service.findCard(cardId);
         CardDTO dto = mapper.mapperdto(cartao);
         return dto;
+    }
+
+    @GetMapping(value = "/blockCard/{cardId}")
+    public String blockCard(@PathVariable Long cardId){
+        return service.blockCardById(cardId);
     }
 
     @GetMapping(value = "/valid/{cardId}")
