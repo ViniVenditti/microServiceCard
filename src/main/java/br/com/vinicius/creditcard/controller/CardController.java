@@ -1,9 +1,11 @@
 package br.com.vinicius.creditcard.controller;
 
 import br.com.vinicius.creditcard.mapper.CardMapper;
-import br.com.vinicius.creditcard.model.*;
+import br.com.vinicius.creditcard.model.CardDTO;
+import br.com.vinicius.creditcard.model.CardModel;
+import br.com.vinicius.creditcard.model.PersonClient;
+import br.com.vinicius.creditcard.model.PersonModel;
 import br.com.vinicius.creditcard.service.CardService;
-import org.hibernate.loader.plan.build.internal.LoadGraphLoadPlanBuildingStrategy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +19,11 @@ public class CardController {
     private CardMapper mapper;
     private CardService service;
     private PersonClient personClient;
-    private PaymentClient paymentClient;
 
-    public CardController(PersonClient personClient, CardMapper mapper, CardService service, PaymentClient paymentClient) {
+    public CardController(PersonClient personClient, CardMapper mapper, CardService service) {
         this.mapper = mapper;
         this.service = service;
         this.personClient = personClient;
-        this.paymentClient = paymentClient;
     }
 
     @GetMapping("/{numero}/{clienteId}")
